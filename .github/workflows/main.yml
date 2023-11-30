@@ -30,6 +30,12 @@ jobs:
         run: |
           kubectl apply -f https://raw.githubusercontent.com/chaos-mesh/apps/master/ping/busybox-statefulset.yaml
 
+      - name: Verify
+        run: |
+          echo "do some verification"
+          kubectl exec busybox-0 -it -n busybox -- ping -c 30 busybox-1.busybox.busybox.svc
+      
+      
       - name: Run chaos mesh action
         uses: chaos-mesh/chaos-mesh-action@master
         env:
